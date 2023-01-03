@@ -6,20 +6,18 @@ export const ProductCardContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin: 100px auto;
-  padding: 5px;
   border-radius: 6px;
-  -webkit-box-shadow: 0px 0px 9px 0px rgba(133, 143, 135, 1);
-  -moz-box-shadow: 0px 0px 9px 0px rgba(133, 143, 135, 1);
-  box-shadow: 0px 0px 9px 0px rgba(133, 143, 135, 1);
+  border: 2px solid var(--white-200);
 
   img {
     border-radius: 6px 6px 0px 0px;
+    padding: 5px;
   }
 
   p {
     font-size: 12px;
     font-weight: 200;
+    padding: 0px 5px;
   }
 
   button {
@@ -36,6 +34,7 @@ export const ProductCardContainer = styled.div`
 export const StyledTitle = styled.h3`
   font-size: 16px;
   width: 60%;
+  margin: 0px 5px;
 `
 
 export const StyledSection = styled.section`
@@ -50,4 +49,5 @@ export const StyledSpan = styled.span`
   background-color: var(--green-dark);
   padding: 3px;
   border-radius: 4px;
+  margin: 0px 5px;
 `

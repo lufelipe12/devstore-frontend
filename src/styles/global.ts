@@ -1,6 +1,10 @@
 import styled, { createGlobalStyle } from "styled-components"
 
-const GlobalStyle = createGlobalStyle`
+interface GlobalStyleProps {
+  isCartOpen: boolean
+}
+
+const GlobalStyle = createGlobalStyle<GlobalStyleProps>`
     /* http://meyerweb.com/eric/tools/css/reset/
     v2.0 | 20110126
     License: none (public domain)
@@ -39,8 +43,13 @@ const GlobalStyle = createGlobalStyle`
         background-color: #fff;
         font-family: 'Montserrat', sans-serif;
         position: relative;
-        height: 100vh;
+        min-height: 100vh;
         display: flex;
+        ${(props) => {
+          if (props.isCartOpen) {
+            return `overflow: hidden`
+          }
+        }}
     }
     button{
         cursor: pointer;      
