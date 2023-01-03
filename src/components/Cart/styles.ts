@@ -13,7 +13,7 @@ export const CartAside = styled.aside<CartStyleProp>`
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: space-around;
+      justify-content: space-between;
       height:100vh;
       width:320px;
       background-color: var(--green-1);
@@ -21,11 +21,11 @@ export const CartAside = styled.aside<CartStyleProp>`
       position:absolute;
       top: 0px;
       right:0px;
-      padding: 10px;
+      padding: 40px 10px;
       box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
       svg{
         :hover{
-          color:var(--green-dark);
+          color:var(--white-200);
           transition:0.5s;
         }
       }
