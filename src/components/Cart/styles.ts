@@ -29,7 +29,11 @@ export const CartAside = styled.aside<CartStyleProp>`
           transition:0.5s;
         }
       }
-      `
+      @media (min-width: 1440px) {
+        width: 370px;
+      }
+
+  `
     }
   }}
 `
@@ -41,6 +45,16 @@ export const TitleDiv = styled.div`
   h2 {
     width: 180px;
   }
+`
+
+export const ItemsSection = styled.section`
+  width: 90%;
+  height: 60%;
+  margin: 0px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
 `
 
 export const FinishDiv = styled.div`
