@@ -1,6 +1,7 @@
 import { Switch } from "react-router-dom"
 import { Route } from "react-router-dom"
 import HomePage from "../pages/HomePage"
+import LoginPage from "../pages/LoginPage"
 
 const Routes = () => {
   return (
@@ -10,7 +11,7 @@ const Routes = () => {
       </Route>
 
       <Route exact path="/login">
-        <h1>login</h1>
+        <LoginPage />
       </Route>
 
       <Route exact path="/register">
