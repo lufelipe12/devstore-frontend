@@ -3,8 +3,11 @@ import { Tooltip } from "@mui/material"
 import { useHistory } from "react-router-dom"
 
 import { StyledHeader, StyledDiv, StyledCartDiv } from "./styles"
+import { useState } from "react"
+import Cart from "../Cart"
 
 const Header = () => {
+  const [isCartOpen, setIsCartOpen] = useState(false)
   const history = useHistory()
 
   const backToLanding = () => {
@@ -19,7 +22,11 @@ const Header = () => {
     return history.push("/register")
   }
 
-  const isLoggedIn = false
+  const cartStateManager = () => {
+    return setIsCartOpen(!isCartOpen)
+  }
+
+  const isLoggedIn = true
 
   return (
     <StyledHeader>
@@ -38,14 +45,17 @@ const Header = () => {
           </Tooltip>
         </StyledDiv>
       ) : (
-        <Tooltip title="carrinho">
-          <StyledCartDiv>
-            <div>
-              <BiCart />
-            </div>
-            <span>0</span>
-          </StyledCartDiv>
-        </Tooltip>
+        <>
+          <Tooltip title="carrinho">
+            <StyledCartDiv onClick={cartStateManager} isCartOpen={isCartOpen}>
+              <div>
+                <BiCart />
+              </div>
+              <span>0</span>
+            </StyledCartDiv>
+          </Tooltip>
+          <Cart isCartOpen={isCartOpen} cartStateManager={cartStateManager} />
+        </>
       )}
     </StyledHeader>
   )
