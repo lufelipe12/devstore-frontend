@@ -1,19 +1,22 @@
 import { Switch } from "react-router-dom"
 import { Route } from "react-router-dom"
+import HomePage from "../pages/HomePage"
+import LoginPage from "../pages/LoginPage"
+import RegisterPage from "../pages/RegisterPage"
 
 const Routes = () => {
   return (
     <Switch>
       <Route exact path="/">
-        <h1>landing page</h1>
+        <HomePage />
       </Route>
 
       <Route exact path="/login">
-        <h1>login</h1>
+        <LoginPage />
       </Route>
 
       <Route exact path="/register">
-        <h1>register</h1>
+        <RegisterPage />
       </Route>
     </Switch>
   )

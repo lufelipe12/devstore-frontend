@@ -45,9 +45,13 @@ export const StyledCartDiv = styled.div<StyledCartDivProps>`
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
+  
     `
     } else {
-      return `display: none;`
+      return `
+      display: none;
+
+    `
     }
   }}
   color: var(--green-dark);
