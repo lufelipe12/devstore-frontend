@@ -11,7 +11,7 @@ export const StyledHeader = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
-
+  position: relative;
   h1:hover {
     cursor: pointer;
   }
@@ -31,13 +31,25 @@ export const StyledDiv = styled.div`
     width: 90px;
   }
 `
+interface StyledCartDivProps {
+  isCartOpen: boolean
+}
 
-export const StyledCartDiv = styled.div`
+export const StyledCartDiv = styled.div<StyledCartDivProps>`
   width: 70px;
   height: 35px;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
+  ${(props) => {
+    if (!props.isCartOpen) {
+      return `
+    display: flex; 
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    `
+    } else {
+      return `display: none;`
+    }
+  }}
   color: var(--green-dark);
   font-weight: 600;
   background-color: var(--white-0);
@@ -45,6 +57,8 @@ export const StyledCartDiv = styled.div`
 
   :hover {
     cursor: pointer;
+    background-color: var(--white-200);
+    transition: 0.5s;
   }
 
   span {
