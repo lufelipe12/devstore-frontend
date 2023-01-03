@@ -1,12 +1,11 @@
 import { Switch } from "react-router-dom"
 import { Route } from "react-router-dom"
-import Header from "../components/Header"
 
 const Routes = () => {
   return (
     <Switch>
       <Route exact path="/">
-        <Header />
+        <h1>landing page</h1>
       </Route>
 
       <Route exact path="/login">
