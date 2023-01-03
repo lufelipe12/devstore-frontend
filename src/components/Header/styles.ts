@@ -6,6 +6,7 @@ export const StyledHeader = styled.header`
   height: 100px;
   color: var(--white-0);
   font-size: 20px;
+  font-weight: 700;
   padding: 20px;
   display: flex;
   align-items: center;
