@@ -26,7 +26,7 @@ const Header = ({ isCartOpen, cartStateManager }: HeaderProps) => {
     return history.push("/register")
   }
 
-  const isLoggedIn = true
+  const isLoggedIn = false
 
   return (
     <StyledHeader>
