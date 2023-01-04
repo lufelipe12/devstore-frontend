@@ -35,9 +35,24 @@ interface StyledCartDivProps {
   isCartOpen: boolean
 }
 
+export const LogoutCartDiv = styled.div`
+  width: 80px;
+  display: flex;
+  flex-direction: column-reverse;
+  height: 65px;
+  align-items: center;
+  justify-content: space-between;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    width: 110px;
+  }
+`
+
 export const StyledCartDiv = styled.div<StyledCartDivProps>`
-  width: 70px;
-  height: 35px;
+  width: 30px;
+  height: 30px;
+
   ${(props) => {
     if (!props.isCartOpen) {
       return `
@@ -66,6 +81,16 @@ export const StyledCartDiv = styled.div<StyledCartDivProps>`
   }
 
   span {
-    font-size: 16px;
+    display: none;
+  }
+
+  @media (min-width: 768px) {
+    span {
+      display: block;
+      font-size: 16px;
+    }
+
+    width: 70px;
+    height: 35px;
   }
 `

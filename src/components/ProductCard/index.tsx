@@ -7,6 +7,7 @@ import {
   StyledSpan,
   StyledTitle,
 } from "./styles"
+import textAdapter from "../../utils/textAdapter"
 
 interface ProductCardProps {
   name: string
@@ -36,7 +37,7 @@ const ProductCard = ({
           <StyledSpan>{`R$ ${parseInt(price)}`}</StyledSpan>
         </div>
       </StyledSection>
-      <p>{description}</p>
+      <p>{textAdapter(description, 70)}</p>
       <div>
         <Button>
           {" "}

@@ -1,17 +1,18 @@
 import styled from "styled-components"
 
 export const ProductCardContainer = styled.div`
-  width: 240px;
-  height: 310px;
+  width: 220px;
+  height: 285px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   border-radius: 6px;
-  border: 2px solid var(--white-200);
+  box-shadow: -1px 0px 5px 1px rgba(102, 102, 102, 0.55);
+  -webkit-box-shadow: -1px 0px 5px 1px rgba(102, 102, 102, 0.55);
+  -moz-box-shadow: -1px 0px 5px 1px rgba(102, 102, 102, 0.55);
 
   img {
     border-radius: 6px 6px 0px 0px;
-    padding: 5px;
   }
 
   p {
@@ -46,6 +47,8 @@ export const StyledSection = styled.section`
 
 export const StyledSpan = styled.span`
   color: var(--white-0);
+  font-size: 15px;
+  font-weight: 700;
   background-color: var(--green-dark);
   padding: 3px;
   border-radius: 4px;

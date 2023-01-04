@@ -17,7 +17,7 @@ export const CartAside = styled.aside<CartStyleProp>`
       height:100vh;
       width:320px;
       background-color: var(--green-1);
-      z-index:1;
+      z-index: 2;
       position:absolute;
       top: 0px;
       right:0px;

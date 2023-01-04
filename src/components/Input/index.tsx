@@ -12,11 +12,7 @@ const MyInput: ForwardRefRenderFunction<HTMLInputElement, Props> = ({
   error,
   type,
 }) => {
-  return (
-    <div>
-      <TextField label={label} color="success" error={!!error} type={type} />
-    </div>
-  )
+  return <TextField label={label} color="success" error={!!error} type={type} />
 }
 
 export default MyInput
