@@ -8,6 +8,7 @@ import {
   StyledName,
   StyledPrice,
 } from "./styles"
+import textAdapter from "../../utils/textAdapter"
 
 interface ItemCardProps {
   id: number
@@ -32,7 +33,7 @@ const ItemCard = ({ id, img, name, price }: ItemCardProps) => {
   return (
     <CartDiv>
       <img src={img} />
-      <StyledName>{`${name.slice(0, 14)}...`}</StyledName>
+      <StyledName>{textAdapter(name, 14)}</StyledName>
       <section>
         <StyledInfo>Qtd:</StyledInfo>
         <ProductCounterDiv>

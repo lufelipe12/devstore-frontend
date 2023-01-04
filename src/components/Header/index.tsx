@@ -1,8 +1,9 @@
 import { BiLogInCircle, BiRocket, BiCart } from "react-icons/bi"
+import { RiLogoutCircleRLine } from "react-icons/ri"
 import { Tooltip } from "@mui/material"
 import { useHistory } from "react-router-dom"
 
-import { StyledHeader, StyledDiv, StyledCartDiv } from "./styles"
+import { StyledHeader, StyledDiv, StyledCartDiv, LogoutCartDiv } from "./styles"
 import Cart from "../Cart"
 
 interface HeaderProps {
@@ -25,7 +26,7 @@ const Header = ({ isCartOpen, cartStateManager }: HeaderProps) => {
     return history.push("/register")
   }
 
-  const isLoggedIn = false
+  const isLoggedIn = true
 
   return (
     <StyledHeader>
@@ -45,14 +46,21 @@ const Header = ({ isCartOpen, cartStateManager }: HeaderProps) => {
         </StyledDiv>
       ) : (
         <>
-          <Tooltip title="carrinho">
-            <StyledCartDiv onClick={cartStateManager} isCartOpen={isCartOpen}>
+          <LogoutCartDiv>
+            <Tooltip title="Carrinho">
+              <StyledCartDiv onClick={cartStateManager} isCartOpen={isCartOpen}>
+                <div>
+                  <BiCart />
+                </div>
+                <span>0</span>
+              </StyledCartDiv>
+            </Tooltip>
+            <Tooltip title="Sair">
               <div>
-                <BiCart />
+                <RiLogoutCircleRLine cursor="pointer" />
               </div>
-              <span>0</span>
-            </StyledCartDiv>
-          </Tooltip>
+            </Tooltip>
+          </LogoutCartDiv>
           <Cart isCartOpen={isCartOpen} cartStateManager={cartStateManager} />
         </>
       )}
