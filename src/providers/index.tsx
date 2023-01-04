@@ -1,4 +1,5 @@
 import { ReactNode } from "react"
+import { AuthProvider } from "./Auth"
 
 import { ProductsProvider } from "./Products"
 import { UserProvider } from "./Users"
@@ -9,9 +10,11 @@ interface AppProvider {
 
 const Provider = ({ children }: AppProvider) => {
   return (
-    <UserProvider>
-      <ProductsProvider>{children}</ProductsProvider>
-    </UserProvider>
+    <AuthProvider>
+      <UserProvider>
+        <ProductsProvider>{children}</ProductsProvider>
+      </UserProvider>
+    </AuthProvider>
   )
 }
 
