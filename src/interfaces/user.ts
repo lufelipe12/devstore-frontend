@@ -10,3 +10,8 @@ export interface User {
   email: string
   createdAt: Date
 }
+
+export interface UserLogin {
+  email: string
+  password: string
+}
