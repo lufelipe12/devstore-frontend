@@ -23,7 +23,7 @@ export const ArrowsDiv = styled.div`
   display: none;
 
   @media (min-width: 768px) {
-    width: 80px;
+    width: 60px;
     display: flex;
     justify-content: space-between;
     align-items: center;
