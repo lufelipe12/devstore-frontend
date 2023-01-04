@@ -1,8 +1,11 @@
+import { useState } from "react"
+import { ToastContainer } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
+
 import Routes from "./routes"
 import GlobalStyle from "./styles/global"
 import Header from "./components/Header"
 import Footer from "./components/Footer"
-import { useState } from "react"
 
 function App() {
   const [isCartOpen, setIsCartOpen] = useState(false)
@@ -23,6 +26,7 @@ function App() {
     <>
       <GlobalStyle isCartOpen={isCartOpen} />
       <Header cartStateManager={cartStateManager} isCartOpen={isCartOpen} />
+      <ToastContainer />
       <Routes />
       <Footer />
     </>

@@ -12,13 +12,13 @@ const HomePage = () => {
 
   const { register, handleSubmit } = useForm()
   const [name, setName] = useState("")
-  const { productsData, getAllProductsData } = useProducts()
+  const { productsData, getProductsData } = useProducts()
 
   useEffect(() => {
     if (name !== "") {
-      getAllProductsData(1, pageLimit, name)
+      getProductsData(1, pageLimit, name)
     } else {
-      getAllProductsData(1, pageLimit)
+      getProductsData(1, pageLimit)
     }
   }, [name])
 
@@ -26,6 +26,9 @@ const HomePage = () => {
     currentPage?: number,
     totalPages?: number
   ): boolean => {
+    if (totalPages == 0) {
+      return false
+    }
     return currentPage !== totalPages
   }
 
@@ -40,7 +43,7 @@ const HomePage = () => {
 
     if (isNextPageExists(currentPage, totalPages)) {
       const nextPage = currentPage && currentPage + 1
-      return await getAllProductsData(
+      return await getProductsData(
         nextPage || 1,
         pageLimit,
         name !== "" ? name : ""
@@ -53,7 +56,7 @@ const HomePage = () => {
 
     if (isPreviousPageExists(currentPage)) {
       const previousPage = currentPage && currentPage - 1
-      return await getAllProductsData(
+      return await getProductsData(
         previousPage || 1,
         pageLimit,
         name !== "" ? name : ""
