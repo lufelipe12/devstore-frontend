@@ -23,28 +23,42 @@ export const ArrowsDiv = styled.div`
   display: none;
 
   @media (min-width: 768px) {
-    width: 80px;
+    width: 60px;
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
 `
+interface ArrowDivProps {
+  pageExists: boolean
+}
 
-export const ArrowDiv = styled.div`
+export const ArrowDiv = styled.div<ArrowDivProps>`
   width: 23px;
   height: 23px;
   border-radius: 5px;
-  border: 1px solid var(--green-0);
   display: flex;
   align-items: center;
-  color: var(--green-0);
   font-size: 20px;
 
-  :hover {
-    cursor: pointer;
-    background-color: var(--white-200);
-    transition: 0.3s;
-  }
+  ${(props) => {
+    if (!props.pageExists) {
+      return `
+      color: var(--white-200);
+      border: 1px solid var(--white-200);
+      `
+    } else {
+      return `
+      color: var(--green-0);
+      border: 1px solid var(--green-0);
+      :hover {
+        cursor: pointer;
+        background-color: var(--white-200);
+        transition: 0.3s;
+      }
+      `
+    }
+  }}
 `
 
 export const StyledMain = styled.main`

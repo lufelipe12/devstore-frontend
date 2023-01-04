@@ -15,7 +15,7 @@ interface ProductCardProps {
   description: string
   hasDiscount?: boolean
   discountValue?: number
-  price: string
+  price: number
   provider?: string
 }
 
@@ -34,7 +34,7 @@ const ProductCard = ({
       <StyledSection>
         <StyledTitle>{name}</StyledTitle>
         <div>
-          <StyledSpan>{`R$ ${parseInt(price)}`}</StyledSpan>
+          <StyledSpan>{`R$ ${Number(price)}`}</StyledSpan>
         </div>
       </StyledSection>
       <p>{textAdapter(description, 70)}</p>
