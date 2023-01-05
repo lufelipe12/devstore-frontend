@@ -1,6 +1,6 @@
 # Description
 
-This repository was made for devnology fullstack test. Here's a front-end for user registration, login and shopping.
+This repository was made for devnology fullstack test. Here's a front-end for user registration, login and shopping. Website produced with the concept of mobile first.
 
 ## Technologies
 
