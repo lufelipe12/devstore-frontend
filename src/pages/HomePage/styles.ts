@@ -85,7 +85,13 @@ export const StyledMain = styled.main`
 `
 
 export const NotFoundText = styled.h1`
-  font-size: 30px;
+  font-size: 20px;
   font-weight: 600;
   color: var(--green-dark);
+  text-align: center;
+  line-height: 30px;
+
+  @media (min-width: 768px) {
+    font-size: 30px;
+  }
 `
