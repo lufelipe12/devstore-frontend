@@ -21,7 +21,9 @@
     "react-icons": "^4.7.1",
     "react-router-dom": "5",
     "react-toastify": "^9.1.1",
+    "remove": "^0.1.5",
     "styled-components": "^5.3.6",
+    "universal-cookie": "^4.0.4",
     "yup": "^0.32.11"
   },
   "devDependencies": {

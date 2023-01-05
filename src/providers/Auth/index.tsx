@@ -4,7 +4,7 @@ import { toast } from "react-toastify"
 import { useCookies } from "react-cookie"
 
 import apiDevstore from "../../services/apiDevstore"
-import { User, UserLogin } from "../../interfaces/user"
+import { UserLogin } from "../../interfaces/user"
 
 interface AuthProps {
   children: ReactNode
@@ -12,7 +12,6 @@ interface AuthProps {
 
 interface AuthContextData {
   isLoggedIn?: boolean
-  userLoggedIn?: User
   login: (user: UserLogin) => Promise<void>
   logout: () => void
 }
@@ -20,13 +19,29 @@ interface AuthContextData {
 const AuthContext = createContext<AuthContextData>({} as AuthContextData)
 
 export const AuthProvider = ({ children }: AuthProps) => {
-  const [cookies, setCookies, removeCookie] = useCookies([])
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>()
-  const [userLoggedIn, setUserLoggedIn] = useState<User>()
+  const [cookies, setCookie, removeCookie] = useCookies()
 
-  const logout = () => {
-    setIsLoggedIn(false)
-    return history.push("/login")
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(() => {
+    console.log(cookies)
+    if (cookies.AuthorizedDevStore) {
+      return true
+    }
+
+    return false
+  })
+
+  const logout = async () => {
+    apiDevstore
+      .post("auth/logout", null, { withCredentials: true })
+      .then((res) => {
+        setIsLoggedIn(false)
+        removeCookie("AuthorizedDevStore")
+        history.push("/login")
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message)
+        console.log(err)
+      })
   }
 
   const history = useHistory()
@@ -37,16 +52,19 @@ export const AuthProvider = ({ children }: AuthProps) => {
       .then((response) => {
         setIsLoggedIn(true)
         toast.success("Login efetuado")
+        setCookie("AuthorizedDevStore", `${user.email}`, {
+          maxAge: 2000000,
+        })
         history.push("/")
-        setUserLoggedIn(response.data)
       })
       .catch((err) => {
+        toast.error(err.response.data.message)
         console.log(err)
       })
   }
 
   return (
-    <AuthContext.Provider value={{ login, logout, isLoggedIn, userLoggedIn }}>
+    <AuthContext.Provider value={{ login, logout, isLoggedIn }}>
       {children}
     </AuthContext.Provider>
   )
