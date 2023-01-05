@@ -14,6 +14,7 @@
     "@hookform/resolvers": "^2.9.10",
     "@mui/material": "^5.11.3",
     "axios": "^1.2.2",
+    "framer-motion": "^8.1.9",
     "react": "^18.2.0",
     "react-cookie": "^4.1.1",
     "react-dom": "^18.2.0",
