@@ -58,10 +58,9 @@ const Cart = ({ isCartOpen, cartStateManager }: CartProps) => {
       <FinishDiv>
         <PriceDiv>
           <span>Total:</span>
-          <span>{`R$ ${items?.reduce(
-            (prev, curr) => prev + +curr.price,
-            0
-          )}`}</span>
+          <span>{`R$ ${items
+            ?.reduce((prev, curr) => prev + +curr.price, 0)
+            .toFixed(1)}`}</span>
         </PriceDiv>
         <Button color="cart" onClick={purchaseItems}>
           Finalizar Compra

@@ -32,16 +32,6 @@ const ItemCard = ({ id, img, name, price }: ItemCardProps) => {
     }
   }, [item])
 
-  const addCounter = () => {
-    return setCounter(counter + 1)
-  }
-
-  const subCounter = () => {
-    if (counter > 1) {
-      return setCounter(counter - 1)
-    }
-  }
-
   return (
     <CartDiv>
       <img src={img} />
@@ -49,12 +39,12 @@ const ItemCard = ({ id, img, name, price }: ItemCardProps) => {
       <section>
         <StyledInfo>Qtd:</StyledInfo>
         <ProductCounterDiv>
-          <div onClick={subCounter}>-</div>
+          <div>-</div>
           <span>{counter}</span>
-          <div onClick={addCounter}>+</div>
+          <div>+</div>
         </ProductCounterDiv>
       </section>
-      <StyledPrice>{`R$ ${price}`}</StyledPrice>
+      <StyledPrice>{`R$ ${price.toFixed(1)}`}</StyledPrice>
       <AiFillCloseCircle onClick={() => deleteItem(id)} />
     </CartDiv>
   )
