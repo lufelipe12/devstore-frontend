@@ -38,10 +38,10 @@ export const AuthProvider = ({ children }: AuthProps) => {
         setIsLoggedIn(true)
         toast.success("Login efetuado")
         history.push("/")
-        return setUserLoggedIn(response.data)
+        setUserLoggedIn(response.data)
       })
       .catch((err) => {
-        return toast.error("Erro ao efetuar login")
+        console.log(err)
       })
   }
 

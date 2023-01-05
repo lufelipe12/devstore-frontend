@@ -9,9 +9,10 @@ import { LoginPageContainer } from "./styles"
 import { useAuth } from "../../providers/Auth"
 import { UserLogin } from "../../interfaces/user"
 import { useUsers } from "../../providers/Users"
+import { useEffect } from "react"
 
 const LoginPage = () => {
-  const { login } = useAuth()
+  const { login, isLoggedIn } = useAuth()
   const { getProfile } = useUsers()
 
   const formSchema = yup.object().shape({
@@ -29,8 +30,13 @@ const LoginPage = () => {
 
   const refreshToken = (data: UserLogin) => {
     login(data)
-    getProfile()
   }
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      getProfile()
+    }
+  }, [isLoggedIn])
 
   return (
     <LoginPageContainer>

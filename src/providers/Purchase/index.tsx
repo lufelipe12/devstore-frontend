@@ -22,7 +22,7 @@ export const PurchaseProvider = ({ children }: PurchaseProps) => {
 
   const purchaseItems = async () => {
     apiDevstore
-      .post("purchase", null, { withCredentials: true })
+      .post("purchases", null, { withCredentials: true })
       .then((res) => {
         toast.success("Compra realizada!", { position: "bottom-right" })
         setPurchase(res.data)
@@ -39,3 +39,5 @@ export const PurchaseProvider = ({ children }: PurchaseProps) => {
     </PurchaseContext.Provider>
   )
 }
+
+export const usePurchases = () => useContext(PurchaseContext)
