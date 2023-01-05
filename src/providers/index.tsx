@@ -3,6 +3,7 @@ import { AuthProvider } from "./Auth"
 import { ItemProvider } from "./Item"
 
 import { ProductsProvider } from "./Products"
+import { PurchaseProvider } from "./Purchase"
 import { UserProvider } from "./Users"
 
 interface AppProvider {
@@ -11,13 +12,15 @@ interface AppProvider {
 
 const Provider = ({ children }: AppProvider) => {
   return (
-    <ItemProvider>
-      <AuthProvider>
-        <UserProvider>
-          <ProductsProvider>{children}</ProductsProvider>
-        </UserProvider>
-      </AuthProvider>
-    </ItemProvider>
+    <PurchaseProvider>
+      <ItemProvider>
+        <AuthProvider>
+          <UserProvider>
+            <ProductsProvider>{children}</ProductsProvider>
+          </UserProvider>
+        </AuthProvider>
+      </ItemProvider>
+    </PurchaseProvider>
   )
 }
 

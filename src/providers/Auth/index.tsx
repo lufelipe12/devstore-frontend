@@ -4,7 +4,8 @@ import { toast } from "react-toastify"
 import { useCookies } from "react-cookie"
 
 import apiDevstore from "../../services/apiDevstore"
-import { User, UserLogin } from "../../interfaces/user"
+import { UserLogin } from "../../interfaces/user"
+import { toastOptions } from "../../configs/react-toast.config"
 
 interface AuthProps {
   children: ReactNode
@@ -12,7 +13,6 @@ interface AuthProps {
 
 interface AuthContextData {
   isLoggedIn?: boolean
-  userLoggedIn?: User
   login: (user: UserLogin) => Promise<void>
   logout: () => void
 }
@@ -20,13 +20,29 @@ interface AuthContextData {
 const AuthContext = createContext<AuthContextData>({} as AuthContextData)
 
 export const AuthProvider = ({ children }: AuthProps) => {
-  const [cookies, setCookies, removeCookie] = useCookies([])
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>()
-  const [userLoggedIn, setUserLoggedIn] = useState<User>()
+  const [cookies, setCookie, removeCookie] = useCookies()
 
-  const logout = () => {
-    setIsLoggedIn(false)
-    return history.push("/login")
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(() => {
+    if (cookies.AuthorizedDevStore) {
+      return true
+    }
+
+    return false
+  })
+
+  const logout = async () => {
+    apiDevstore
+      .post("auth/logout", null, { withCredentials: true })
+      .then((res) => {
+        setIsLoggedIn(false)
+        removeCookie("AuthorizedDevStore")
+        toast.success("Logout realizado.", toastOptions)
+        history.push("/")
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message, toastOptions)
+        console.log(err)
+      })
   }
 
   const history = useHistory()
@@ -36,17 +52,20 @@ export const AuthProvider = ({ children }: AuthProps) => {
       .post("auth/login", user, { withCredentials: true })
       .then((response) => {
         setIsLoggedIn(true)
-        toast.success("Login efetuado")
+        toast.success("Login efetuado.", toastOptions)
+        setCookie("AuthorizedDevStore", `${user.email}`, {
+          maxAge: 2000000,
+        })
         history.push("/")
-        return setUserLoggedIn(response.data)
       })
       .catch((err) => {
-        return toast.error("Erro ao efetuar login")
+        toast.error(err.response.data.message, toastOptions)
+        console.log(err)
       })
   }
 
   return (
-    <AuthContext.Provider value={{ login, logout, isLoggedIn, userLoggedIn }}>
+    <AuthContext.Provider value={{ login, logout, isLoggedIn }}>
       {children}
     </AuthContext.Provider>
   )

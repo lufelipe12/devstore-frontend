@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom"
 
 import apiDevstore from "../../services/apiDevstore"
 import { UserToCreate, User } from "../../interfaces/user"
+import { toastOptions } from "../../configs/react-toast.config"
 
 interface UserProps {
   children: ReactNode
@@ -27,15 +28,11 @@ export const UserProvider = ({ children }: UserProps) => {
       .post("users", newUser)
       .then((res) => {
         setUser(res.data)
-        toast.success("Tudo certo para fazer seu login.", {
-          position: "bottom-right",
-        })
+        toast.success("Tudo certo para fazer seu login.", toastOptions)
         return history.push("login")
       })
       .catch((err) => {
-        toast.error(err.response.data.message, {
-          position: "bottom-right",
-        })
+        toast.error("Erro ao realizar o cadastro.", toastOptions)
       })
   }
 
@@ -46,9 +43,7 @@ export const UserProvider = ({ children }: UserProps) => {
         setUser(res.data)
       })
       .catch((err) => {
-        toast.error(err.response.data.message, {
-          position: "bottom-right",
-        })
+        toast.error(err.response.data.message, toastOptions)
       })
   }
 

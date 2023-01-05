@@ -3,6 +3,7 @@ import { toast } from "react-toastify"
 
 import apiDevstore from "../../services/apiDevstore"
 import { Item, ItemToCreate } from "../../interfaces/item"
+import { toastOptions } from "../../configs/react-toast.config"
 
 interface ItemProps {
   children: ReactNode
@@ -23,15 +24,11 @@ export const ItemProvider = ({ children }: ItemProps) => {
     apiDevstore
       .post("items", newItem, { withCredentials: true })
       .then((res) => {
-        toast.success("Item adicionado no carrinho", {
-          position: "bottom-right",
-        })
+        toast.success("Item adicionado no carrinho", toastOptions)
         return setItem(res.data)
       })
       .catch((err) => {
-        toast.error(err.response.data.message, {
-          position: "bottom-right",
-        })
+        toast.error(err.response.data.message, toastOptions)
       })
   }
 
@@ -39,15 +36,11 @@ export const ItemProvider = ({ children }: ItemProps) => {
     apiDevstore
       .delete(`items/${id}`, { withCredentials: true })
       .then((res) => {
-        toast.success("Item deletado com sucesso", {
-          position: "bottom-right",
-        })
+        toast.success("Item deletado com sucesso", toastOptions)
         return setItem(res.data)
       })
       .catch((err) => {
-        toast.error(err.response.data.message, {
-          position: "bottom-right",
-        })
+        toast.error(err.response.data.message, toastOptions)
       })
   }
 

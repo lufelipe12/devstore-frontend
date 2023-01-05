@@ -1,5 +1,7 @@
+import { useEffect } from "react"
 import { AiFillCloseCircle } from "react-icons/ai"
 import { useAuth } from "../../providers/Auth"
+import { usePurchases } from "../../providers/Purchase"
 import { useUsers } from "../../providers/Users"
 import Button from "../Button"
 import ItemCard from "../ItemCard"
@@ -18,8 +20,14 @@ interface CartProps {
 
 const Cart = ({ isCartOpen, cartStateManager }: CartProps) => {
   const { userLoggedIn } = useAuth()
+  const { getProfile } = useUsers()
+  const { purchaseItems, purchase } = usePurchases()
 
-  //pegar os itens do carrinho
+  useEffect(() => {
+    if (purchase) {
+      getProfile()
+    }
+  }, [purchase])
 
   const { user } = useUsers()
   const usersCart = user?.cart
@@ -53,7 +61,9 @@ const Cart = ({ isCartOpen, cartStateManager }: CartProps) => {
             0
           )}`}</span>
         </PriceDiv>
-        <Button color="cart">Finalizar Compra</Button>
+        <Button color="cart" onClick={purchaseItems}>
+          Finalizar Compra
+        </Button>
       </FinishDiv>
     </CartAside>
   )
