@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom"
 
 import { StyledHeader, StyledDiv, StyledCartDiv, LogoutCartDiv } from "./styles"
 import Cart from "../Cart"
+import { useAuth } from "../../providers/Auth"
 
 interface HeaderProps {
   isCartOpen: boolean
@@ -26,7 +27,7 @@ const Header = ({ isCartOpen, cartStateManager }: HeaderProps) => {
     return history.push("/register")
   }
 
-  const isLoggedIn = false
+  const { isLoggedIn, logout } = useAuth()
 
   return (
     <StyledHeader>
@@ -56,7 +57,7 @@ const Header = ({ isCartOpen, cartStateManager }: HeaderProps) => {
               </StyledCartDiv>
             </Tooltip>
             <Tooltip title="Sair">
-              <div>
+              <div onClick={logout}>
                 <RiLogoutCircleRLine cursor="pointer" />
               </div>
             </Tooltip>

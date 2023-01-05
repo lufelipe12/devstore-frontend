@@ -8,15 +8,18 @@ import {
   StyledTitle,
 } from "./styles"
 import textAdapter from "../../utils/textAdapter"
+import { useItems } from "../../providers/Item"
+import { useEffect } from "react"
+import { useUsers } from "../../providers/Users"
 
 interface ProductCardProps {
   name: string
   image: string
   description: string
-  hasDiscount?: boolean
+  hasDiscount: boolean
   discountValue?: number
   price: number
-  provider?: string
+  provider: string
 }
 
 const ProductCard = ({
@@ -28,6 +31,23 @@ const ProductCard = ({
   price,
   provider,
 }: ProductCardProps) => {
+  const { createItem, item } = useItems()
+  const { getProfile, user } = useUsers()
+
+  useEffect(() => {
+    if (item) {
+      getProfile()
+    }
+  }, [item])
+
+  const itemObject = {
+    name,
+    img: image,
+    price: +price,
+    provider,
+    hasDiscount,
+  }
+
   return (
     <ProductCardContainer>
       <img src={image} />
@@ -39,7 +59,7 @@ const ProductCard = ({
       </StyledSection>
       <p>{textAdapter(description, 70)}</p>
       <div>
-        <Button>
+        <Button onClick={() => createItem(itemObject)}>
           {" "}
           <RiShoppingBasketLine />
           Comprar

@@ -1,4 +1,6 @@
 import { AiFillCloseCircle } from "react-icons/ai"
+import { useAuth } from "../../providers/Auth"
+import { useUsers } from "../../providers/Users"
 import Button from "../Button"
 import ItemCard from "../ItemCard"
 import {
@@ -15,17 +17,13 @@ interface CartProps {
 }
 
 const Cart = ({ isCartOpen, cartStateManager }: CartProps) => {
-  const items = [
-    {
-      id: 4,
-      name: "motor",
-      price: "100",
-      provider: "Brazil",
-      hasDiscount: true,
-      purchase: null,
-      img: "http://placeimg.com/640/480/business",
-    },
-  ]
+  const { userLoggedIn } = useAuth()
+
+  //pegar os itens do carrinho
+
+  const { user } = useUsers()
+  const usersCart = user?.cart
+  const items = usersCart?.items
 
   return (
     <CartAside isCartOpen={isCartOpen}>
@@ -34,14 +32,26 @@ const Cart = ({ isCartOpen, cartStateManager }: CartProps) => {
         <AiFillCloseCircle onClick={cartStateManager} cursor={"pointer"} />
       </TitleDiv>
       <ItemsSection>
-        {items.map(({ id, img, name, price }) => {
-          return <ItemCard id={id} img={img} name={name} price={+price} />
-        })}
+        {items &&
+          items.map(({ id, img, name, price }, index) => {
+            return (
+              <ItemCard
+                key={index}
+                id={id}
+                img={img}
+                name={name}
+                price={+price}
+              />
+            )
+          })}
       </ItemsSection>
       <FinishDiv>
         <PriceDiv>
           <span>Total:</span>
-          <span>R$ 400</span>
+          <span>{`R$ ${items?.reduce(
+            (prev, curr) => prev + +curr.price,
+            0
+          )}`}</span>
         </PriceDiv>
         <Button color="cart">Finalizar Compra</Button>
       </FinishDiv>
