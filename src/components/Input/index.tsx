@@ -11,7 +11,7 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   type?: string
   register: any
   name: string
-  helperText?: string
+  helperText?: any
 }
 
 const MyInput: ForwardRefRenderFunction<HTMLInputElement, Props> = (

@@ -1,4 +1,4 @@
-import { FieldValue, useForm } from "react-hook-form"
+import { FieldError, FieldValue, useForm } from "react-hook-form"
 import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
 
@@ -9,7 +9,7 @@ import { LoginPageContainer } from "./styles"
 import { useAuth } from "../../providers/Auth"
 import { UserLogin } from "../../interfaces/user"
 import { useUsers } from "../../providers/Users"
-import { useEffect } from "react"
+import { ReactNode, useEffect } from "react"
 import MotionRoutes from "../../configs/route-motion.config"
 
 const LoginPage = () => {
