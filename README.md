@@ -54,6 +54,7 @@ For the deployment, the [vercel](https://vercel.com/) platform was used as an in
 
 ## Documentation
 
-In this project I used trello to guide my tasks. Here are the links to the documentation.
+In this project I used trello to guide my tasks and Figma for the design. Here are the links to the documentation.
 
 - [Trello](https://trello.com/b/iQaaKzXK/devstore-frontend)
+- [Figma](https://www.figma.com/file/roZVBYlo3NUMV4jVRgrL5f/Devstore-Front-End?node-id=0%3A1&t=oAzsyb3WHwiBPASM-0)
