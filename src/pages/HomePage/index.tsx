@@ -15,6 +15,8 @@ import {
   StyledMain,
 } from "./styles"
 import { useProducts } from "../../providers/Products"
+import { useAuth } from "../../providers/Auth"
+import { useUsers } from "../../providers/Users"
 
 const HomePage = () => {
   const pageLimit = 12
@@ -22,8 +24,13 @@ const HomePage = () => {
   const { register, handleSubmit } = useForm()
   const [name, setName] = useState("")
   const { productsData, getProductsData } = useProducts()
+  const { isLoggedIn } = useAuth()
+  const { getProfile } = useUsers()
 
   useEffect(() => {
+    if (isLoggedIn == true) {
+      getProfile()
+    }
     if (name !== "") {
       getProductsData(1, pageLimit, name)
     } else {

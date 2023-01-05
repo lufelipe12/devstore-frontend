@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom"
 import { StyledHeader, StyledDiv, StyledCartDiv, LogoutCartDiv } from "./styles"
 import Cart from "../Cart"
 import { useAuth } from "../../providers/Auth"
+import { useUsers } from "../../providers/Users"
 
 interface HeaderProps {
   isCartOpen: boolean
@@ -14,6 +15,9 @@ interface HeaderProps {
 
 const Header = ({ isCartOpen, cartStateManager }: HeaderProps) => {
   const history = useHistory()
+  const { user } = useUsers()
+  const cart = user?.cart
+  const items = cart?.items
 
   const backToLanding = () => {
     return history.push("/")
@@ -53,7 +57,7 @@ const Header = ({ isCartOpen, cartStateManager }: HeaderProps) => {
                 <div>
                   <BiCart />
                 </div>
-                <span>0</span>
+                <span>{items ? items.length : 0}</span>
               </StyledCartDiv>
             </Tooltip>
             <Tooltip title="Sair">

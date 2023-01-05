@@ -11,6 +11,7 @@ import {
 import textAdapter from "../../utils/textAdapter"
 import { useUsers } from "../../providers/Users"
 import { useItems } from "../../providers/Item"
+import { useAuth } from "../../providers/Auth"
 
 interface ItemCardProps {
   id: number
@@ -23,9 +24,10 @@ const ItemCard = ({ id, img, name, price }: ItemCardProps) => {
   const [counter, setCounter] = useState(0)
   const { deleteItem, item } = useItems()
   const { getProfile } = useUsers()
+  const { isLoggedIn } = useAuth()
 
   useEffect(() => {
-    if (item) {
+    if (item && isLoggedIn) {
       getProfile()
     }
   }, [item])

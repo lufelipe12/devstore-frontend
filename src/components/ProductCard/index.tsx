@@ -11,6 +11,7 @@ import textAdapter from "../../utils/textAdapter"
 import { useItems } from "../../providers/Item"
 import { useEffect } from "react"
 import { useUsers } from "../../providers/Users"
+import { useAuth } from "../../providers/Auth"
 
 interface ProductCardProps {
   name: string
@@ -33,9 +34,10 @@ const ProductCard = ({
 }: ProductCardProps) => {
   const { createItem, item } = useItems()
   const { getProfile, user } = useUsers()
+  const { isLoggedIn } = useAuth()
 
   useEffect(() => {
-    if (item) {
+    if (item && isLoggedIn) {
       getProfile()
     }
   }, [item])

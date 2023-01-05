@@ -19,12 +19,12 @@ interface CartProps {
 }
 
 const Cart = ({ isCartOpen, cartStateManager }: CartProps) => {
-  const { userLoggedIn } = useAuth()
+  const { isLoggedIn } = useAuth()
   const { getProfile } = useUsers()
   const { purchaseItems, purchase } = usePurchases()
 
   useEffect(() => {
-    if (purchase) {
+    if (purchase && isLoggedIn) {
       getProfile()
     }
   }, [purchase])
