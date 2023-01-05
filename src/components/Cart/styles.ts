@@ -37,14 +37,25 @@ export const CartAside = styled.aside<CartStyleProp>`
     }
   }}
 `
+
 export const TitleDiv = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-around;
+  flex-wrap: wrap;
 
   h2 {
     width: 180px;
   }
+`
+
+export const WelcomeUser = styled.h4`
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 20px;
+  text-align: left;
+  width: 85%;
+  margin-top: 15px;
 `
 
 export const ItemsSection = styled.section`

@@ -11,6 +11,7 @@ import {
   ItemsSection,
   PriceDiv,
   TitleDiv,
+  WelcomeUser,
 } from "./styles"
 
 interface CartProps {
@@ -38,6 +39,7 @@ const Cart = ({ isCartOpen, cartStateManager }: CartProps) => {
       <TitleDiv>
         <h2>Carrinho de compras</h2>
         <AiFillCloseCircle onClick={cartStateManager} cursor={"pointer"} />
+        <WelcomeUser>{user?.name}, esse é seu carrinho !</WelcomeUser>
       </TitleDiv>
       <ItemsSection>
         {items &&
