@@ -1,5 +1,6 @@
 import { createContext, ReactNode, useContext, useState } from "react"
 import { toast } from "react-toastify"
+import { toastOptions } from "../../configs/react-toast.config"
 import { Purchase } from "../../interfaces/purchase"
 
 import apiDevstore from "../../services/apiDevstore"
@@ -24,11 +25,11 @@ export const PurchaseProvider = ({ children }: PurchaseProps) => {
     apiDevstore
       .post("purchases", null, { withCredentials: true })
       .then((res) => {
-        toast.success("Compra realizada!", { position: "bottom-right" })
+        toast.success("Compra realizada!", toastOptions)
         setPurchase(res.data)
       })
       .catch((err) => {
-        toast.error(err.response.data.message, { position: "bottom-right" })
+        toast.error(err.response.data.message, toastOptions)
         console.log(err)
       })
   }

@@ -5,6 +5,7 @@ import { useCookies } from "react-cookie"
 
 import apiDevstore from "../../services/apiDevstore"
 import { UserLogin } from "../../interfaces/user"
+import { toastOptions } from "../../configs/react-toast.config"
 
 interface AuthProps {
   children: ReactNode
@@ -22,7 +23,6 @@ export const AuthProvider = ({ children }: AuthProps) => {
   const [cookies, setCookie, removeCookie] = useCookies()
 
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(() => {
-    console.log(cookies)
     if (cookies.AuthorizedDevStore) {
       return true
     }
@@ -36,10 +36,11 @@ export const AuthProvider = ({ children }: AuthProps) => {
       .then((res) => {
         setIsLoggedIn(false)
         removeCookie("AuthorizedDevStore")
-        history.push("/login")
+        toast.success("Logout realizado.", toastOptions)
+        history.push("/")
       })
       .catch((err) => {
-        toast.error(err.response.data.message)
+        toast.error(err.response.data.message, toastOptions)
         console.log(err)
       })
   }
@@ -51,14 +52,14 @@ export const AuthProvider = ({ children }: AuthProps) => {
       .post("auth/login", user, { withCredentials: true })
       .then((response) => {
         setIsLoggedIn(true)
-        toast.success("Login efetuado")
+        toast.success("Login efetuado.", toastOptions)
         setCookie("AuthorizedDevStore", `${user.email}`, {
           maxAge: 2000000,
         })
         history.push("/")
       })
       .catch((err) => {
-        toast.error(err.response.data.message)
+        toast.error(err.response.data.message, toastOptions)
         console.log(err)
       })
   }
