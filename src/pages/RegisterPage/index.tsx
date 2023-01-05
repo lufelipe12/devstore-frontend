@@ -14,9 +14,9 @@ const RegisterPage = () => {
   const { createUser } = useUsers()
 
   const formSchema = yup.object().shape({
-    name: yup.string().required("Campo obrigatório"),
+    name: yup.string().min(5).required("Campo obrigatório"),
     email: yup.string().email("E-mail inválido").required("Campo obrigatório"),
-    password: yup.string().required("Campo obrigatório"),
+    password: yup.string().min(6).required("Campo obrigatório"),
   })
 
   const {
