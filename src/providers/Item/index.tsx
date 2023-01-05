@@ -31,7 +31,7 @@ export const ItemProvider = ({ children }: ItemProps) => {
         items && setItems([...items, res.data])
       })
       .catch((err) => {
-        toast.error(err.response.data.message, toastOptions)
+        toast.error("Não foi possível adicionar o item.", toastOptions)
       })
   }
 
@@ -43,7 +43,7 @@ export const ItemProvider = ({ children }: ItemProps) => {
         return setItem(res.data)
       })
       .catch((err) => {
-        toast.error(err.response.data.message, toastOptions)
+        toast.error("Não foi possível retirar o item.", toastOptions)
       })
   }
 

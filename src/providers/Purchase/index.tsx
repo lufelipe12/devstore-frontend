@@ -29,7 +29,7 @@ export const PurchaseProvider = ({ children }: PurchaseProps) => {
         setPurchase(res.data)
       })
       .catch((err) => {
-        toast.error(err.response.data.message, toastOptions)
+        toast.error("Ops, algo deu errado com a compra.", toastOptions)
         console.log(err)
       })
   }

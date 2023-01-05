@@ -35,7 +35,7 @@ const RegisterPage = () => {
           onSubmit={handleSubmit((data) => createUser(data as UserToCreate))}
         >
           <MyInput
-            label="name"
+            label="nome"
             register={register}
             name="name"
             error={!!errors.name}
@@ -49,7 +49,7 @@ const RegisterPage = () => {
             helperText={errors.email?.message}
           />
           <MyInput
-            label="password"
+            label="senha"
             type="password"
             register={register}
             name="password"

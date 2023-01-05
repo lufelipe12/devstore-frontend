@@ -1,8 +1,10 @@
 import { RiShoppingBasketLine } from "react-icons/ri"
+import { AiOutlineFire } from "react-icons/ai"
 
 import Button from "../Button"
 import {
   ProductCardContainer,
+  PromoText,
   StyledSection,
   StyledSpan,
   StyledTitle,
@@ -53,10 +55,15 @@ const ProductCard = ({
   return (
     <ProductCardContainer>
       <img src={image} />
+      {hasDiscount && (
+        <PromoText>
+          <AiOutlineFire />
+        </PromoText>
+      )}
       <StyledSection>
         <StyledTitle>{name}</StyledTitle>
         <div>
-          <StyledSpan>{`R$ ${Number(price)}`}</StyledSpan>
+          <StyledSpan>{`R$ ${Number(price).toFixed(0)}`}</StyledSpan>
         </div>
       </StyledSection>
       <p>{textAdapter(description, 70)}</p>

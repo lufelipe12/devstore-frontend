@@ -43,7 +43,7 @@ export const AuthProvider = ({ children }: AuthProps) => {
         history.push("/")
       })
       .catch((err) => {
-        toast.error(err.response.data.message, toastOptions)
+        toast.error("Credenciais inválidas.", toastOptions)
         console.log(err)
       })
   }
@@ -58,7 +58,7 @@ export const AuthProvider = ({ children }: AuthProps) => {
         history.push("/login")
       })
       .catch((err) => {
-        toast.error(err.response.data.message, toastOptions)
+        toast.error("Algo deu errado com sua solicitação.", toastOptions)
         console.log(err)
       })
   }

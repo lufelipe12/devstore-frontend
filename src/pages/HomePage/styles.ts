@@ -9,14 +9,38 @@ export const Container = styled.div`
   justify-content: space-between;
   align-items: center;
 `
-export const InputDiv = styled.div`
+export const SearchDiv = styled.div`
   height: 50px;
+
   @media (min-width: 768px) {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin: 0px 0px 15px 0px;
+  }
+`
+export const FilterContainer = styled.div`
+  display: flex;
+`
+
+interface OnSaleDivProps {
+  hasDiscount: boolean
+}
+
+export const OnSaleDiv = styled.div<OnSaleDivProps>`
+  margin: 12px 0px 0px 20px;
+  font-size: 20px;
+  text-align: center;
+  ${(props) => {
+    if (props.hasDiscount) {
+      return `color: var(--white-200);`
+    } else {
+      return `color: var(--green-1);`
+    }
+  }}
+  :hover {
+    cursor: pointer;
   }
 `
 

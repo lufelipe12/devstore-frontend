@@ -55,7 +55,7 @@ const LoginPage = () => {
           />
           <MyInput
             type="password"
-            label="password"
+            label="senha"
             register={register}
             name="password"
             error={!!errors.password}

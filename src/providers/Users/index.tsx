@@ -43,7 +43,7 @@ export const UserProvider = ({ children }: UserProps) => {
         setUser(res.data)
       })
       .catch((err) => {
-        toast.error(err.response.data.message, toastOptions)
+        toast.error("Perfil não encontrado.", toastOptions)
       })
   }
 

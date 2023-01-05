@@ -25,7 +25,12 @@ interface ProductsResponse {
 
 interface ProductsContextData {
   productsData: ProductsResponse | undefined
-  getProductsData: (page: number, limit: number, name?: string) => Promise<void>
+  getProductsData: (
+    page: number,
+    limit: number,
+    name?: string,
+    hasDiscount?: boolean
+  ) => Promise<void>
 }
 
 const ProductContext = createContext<ProductsContextData>(
@@ -35,9 +40,18 @@ const ProductContext = createContext<ProductsContextData>(
 export const ProductsProvider = ({ children }: ProductsProps) => {
   const [productsData, setProductsData] = useState()
 
-  const getProductsData = async (page = 1, limit = 8, name?: string) => {
+  const getProductsData = async (
+    page = 1,
+    limit = 8,
+    name?: string,
+    hasDiscount?: boolean
+  ) => {
     await apiDevstore
-      .get(`products?page=${page}&limit=${limit}&name=${name || ""}`)
+      .get(
+        `products?page=${page}&limit=${limit}&name=${name || ""}&hasDiscount=${
+          hasDiscount || ""
+        }`
+      )
       .then((res) => setProductsData(res.data))
       .catch((err) => console.log(err))
   }

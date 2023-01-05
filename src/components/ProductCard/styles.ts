@@ -4,6 +4,7 @@ export const ProductCardContainer = styled.div`
   width: 220px;
   height: 285px;
   display: flex;
+  position: relative;
   flex-direction: column;
   justify-content: space-between;
   border-radius: 6px;
@@ -30,6 +31,13 @@ export const ProductCardContainer = styled.div`
     height: 18px;
     margin-right: 5px;
   }
+`
+
+export const PromoText = styled.h2`
+  color: var(--green-1);
+  position: absolute;
+  right: 0px;
+  top: 10px;
 `
 
 export const StyledTitle = styled.h3`
