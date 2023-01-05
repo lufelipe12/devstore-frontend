@@ -46,9 +46,11 @@ $ yarn
 $ yarn dev
 
 ```
-## Deployment URL:
+## Deployment:
 
 For the deployment, the [vercel](https://vercel.com/) platform was used as an infrastructure provider.
+
+[App](https://devstore-frontend-lufelipe12.vercel.app/)
 
 ## Documentation
 
