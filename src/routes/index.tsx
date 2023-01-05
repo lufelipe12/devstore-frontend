@@ -1,11 +1,14 @@
-import { Switch } from "react-router-dom"
+import { Redirect, Switch } from "react-router-dom"
 import { Route } from "react-router-dom"
 
 import HomePage from "../pages/HomePage"
 import LoginPage from "../pages/LoginPage"
 import RegisterPage from "../pages/RegisterPage"
+import { useAuth } from "../providers/Auth"
 
 const Routes = () => {
+  const { isLoggedIn } = useAuth()
+
   return (
     <Switch>
       <Route exact path="/">
@@ -13,11 +16,11 @@ const Routes = () => {
       </Route>
 
       <Route exact path="/login">
-        <LoginPage />
+        {isLoggedIn ? <Redirect to="/" /> : <LoginPage />}
       </Route>
 
       <Route exact path="/register">
-        <RegisterPage />
+        {isLoggedIn ? <Redirect to="/" /> : <RegisterPage />}
       </Route>
     </Switch>
   )
