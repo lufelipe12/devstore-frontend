@@ -8,6 +8,7 @@ import Button from "../../components/Button"
 import { RegisterPageContainer } from "./styles"
 import { useUsers } from "../../providers/Users"
 import { UserToCreate } from "../../interfaces/user"
+import MotionRoutes from "../../configs/route-motion.config"
 
 const RegisterPage = () => {
   const { createUser } = useUsers()
@@ -27,36 +28,38 @@ const RegisterPage = () => {
   })
 
   return (
-    <RegisterPageContainer>
-      <Form
-        title="Cadastro"
-        onSubmit={handleSubmit((data) => createUser(data as UserToCreate))}
-      >
-        <MyInput
-          label="name"
-          register={register}
-          name="name"
-          error={!!errors.name}
-          helperText={errors.name?.message}
-        />
-        <MyInput
-          label="email"
-          register={register}
-          name="email"
-          error={!!errors.email}
-          helperText={errors.email?.message}
-        />
-        <MyInput
-          label="password"
-          type="password"
-          register={register}
-          name="password"
-          error={!!errors.password}
-          helperText={errors.password?.message}
-        />
-        <Button type="submit">Cadastrar</Button>
-      </Form>
-    </RegisterPageContainer>
+    <MotionRoutes>
+      <RegisterPageContainer>
+        <Form
+          title="Cadastro"
+          onSubmit={handleSubmit((data) => createUser(data as UserToCreate))}
+        >
+          <MyInput
+            label="name"
+            register={register}
+            name="name"
+            error={!!errors.name}
+            helperText={errors.name?.message}
+          />
+          <MyInput
+            label="email"
+            register={register}
+            name="email"
+            error={!!errors.email}
+            helperText={errors.email?.message}
+          />
+          <MyInput
+            label="password"
+            type="password"
+            register={register}
+            name="password"
+            error={!!errors.password}
+            helperText={errors.password?.message}
+          />
+          <Button type="submit">Cadastrar</Button>
+        </Form>
+      </RegisterPageContainer>
+    </MotionRoutes>
   )
 }
 

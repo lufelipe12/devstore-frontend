@@ -10,6 +10,7 @@ import { useAuth } from "../../providers/Auth"
 import { UserLogin } from "../../interfaces/user"
 import { useUsers } from "../../providers/Users"
 import { useEffect } from "react"
+import MotionRoutes from "../../configs/route-motion.config"
 
 const LoginPage = () => {
   const { login, isLoggedIn } = useAuth()
@@ -39,29 +40,31 @@ const LoginPage = () => {
   }, [isLoggedIn])
 
   return (
-    <LoginPageContainer>
-      <Form
-        title="Fazer login"
-        onSubmit={handleSubmit((data) => refreshToken(data as UserLogin))}
-      >
-        <MyInput
-          label="email"
-          register={register}
-          name="email"
-          error={!!errors.email}
-          helperText={errors.email?.message}
-        />
-        <MyInput
-          type="password"
-          label="password"
-          register={register}
-          name="password"
-          error={!!errors.password}
-          helperText={errors.password?.message}
-        />
-        <Button type="submit">Entrar</Button>
-      </Form>
-    </LoginPageContainer>
+    <MotionRoutes>
+      <LoginPageContainer>
+        <Form
+          title="Fazer login"
+          onSubmit={handleSubmit((data) => refreshToken(data as UserLogin))}
+        >
+          <MyInput
+            label="email"
+            register={register}
+            name="email"
+            error={!!errors.email}
+            helperText={errors.email?.message}
+          />
+          <MyInput
+            type="password"
+            label="password"
+            register={register}
+            name="password"
+            error={!!errors.password}
+            helperText={errors.password?.message}
+          />
+          <Button type="submit">Entrar</Button>
+        </Form>
+      </LoginPageContainer>
+    </MotionRoutes>
   )
 }
 

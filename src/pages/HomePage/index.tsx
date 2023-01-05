@@ -17,6 +17,7 @@ import {
 import { useProducts } from "../../providers/Products"
 import { useAuth } from "../../providers/Auth"
 import { useUsers } from "../../providers/Users"
+import MotionRoutes from "../../configs/route-motion.config"
 
 const HomePage = () => {
   const pageLimit = 12
@@ -81,21 +82,57 @@ const HomePage = () => {
   }
 
   return (
-    <Container>
-      <InputDiv>
-        <form onSubmit={handleSubmit((data) => setName(data.name))}>
-          <TextField
-            color="success"
-            id="outlined-basic"
-            label="Pesquise pelo nome"
-            variant="outlined"
-            size="small"
-            focused
-            type="text"
-            {...register("name")}
-          />
-        </form>
-        <ArrowsDiv>
+    <MotionRoutes>
+      <Container>
+        <InputDiv>
+          <form onSubmit={handleSubmit((data) => setName(data.name))}>
+            <TextField
+              color="success"
+              id="outlined-basic"
+              label="Pesquise pelo nome"
+              variant="outlined"
+              size="small"
+              focused
+              type="text"
+              {...register("name")}
+            />
+          </form>
+          <ArrowsDiv>
+            <ArrowDiv pageExists={isPreviousPageExists(productsData?.page)}>
+              <RiArrowLeftFill onClick={backToPreviousPage} />
+            </ArrowDiv>
+            <ArrowDiv
+              pageExists={isNextPageExists(
+                productsData?.page,
+                productsData?.totalPages
+              )}
+            >
+              <RiArrowRightFill onClick={goToNextPage} />
+            </ArrowDiv>
+          </ArrowsDiv>
+        </InputDiv>
+        <StyledMain>
+          {productsData &&
+            productsData.products.map(
+              (
+                { name, image, description, price, hasDiscount, provider },
+                index
+              ) => {
+                return (
+                  <ProductCard
+                    key={index}
+                    name={name}
+                    image={image}
+                    description={description}
+                    price={price}
+                    hasDiscount={hasDiscount}
+                    provider={provider}
+                  />
+                )
+              }
+            )}
+        </StyledMain>
+        <ArrowsMobileDiv>
           <ArrowDiv pageExists={isPreviousPageExists(productsData?.page)}>
             <RiArrowLeftFill onClick={backToPreviousPage} />
           </ArrowDiv>
@@ -107,48 +144,14 @@ const HomePage = () => {
           >
             <RiArrowRightFill onClick={goToNextPage} />
           </ArrowDiv>
-        </ArrowsDiv>
-      </InputDiv>
-      <StyledMain>
-        {productsData &&
-          productsData.products.map(
-            (
-              { name, image, description, price, hasDiscount, provider },
-              index
-            ) => {
-              return (
-                <ProductCard
-                  key={index}
-                  name={name}
-                  image={image}
-                  description={description}
-                  price={price}
-                  hasDiscount={hasDiscount}
-                  provider={provider}
-                />
-              )
-            }
-          )}
-      </StyledMain>
-      <ArrowsMobileDiv>
-        <ArrowDiv pageExists={isPreviousPageExists(productsData?.page)}>
-          <RiArrowLeftFill onClick={backToPreviousPage} />
-        </ArrowDiv>
-        <ArrowDiv
-          pageExists={isNextPageExists(
-            productsData?.page,
-            productsData?.totalPages
-          )}
-        >
-          <RiArrowRightFill onClick={goToNextPage} />
-        </ArrowDiv>
-      </ArrowsMobileDiv>
-      {productsData?.products.length == 0 && (
-        <NotFoundText>
-          Nada encontrado... <FaRegSadTear />
-        </NotFoundText>
-      )}
-    </Container>
+        </ArrowsMobileDiv>
+        {productsData?.products.length == 0 && (
+          <NotFoundText>
+            Nada encontrado... <FaRegSadTear />
+          </NotFoundText>
+        )}
+      </Container>
+    </MotionRoutes>
   )
 }
 

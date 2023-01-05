@@ -1,9 +1,8 @@
 import styled from "styled-components"
 
 export const CartDiv = styled.div`
-  width: 290px;
-  height: 80px;
-  width: 100%;
+  min-height: 80px;
+  width: 95%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -56,6 +55,7 @@ export const StyledName = styled.p`
   color: var(--green-dark);
   font-weight: 500;
   font-size: 13px;
+  width: 65px;
 `
 
 export const StyledInfo = styled.h5`

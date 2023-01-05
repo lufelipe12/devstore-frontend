@@ -21,7 +21,7 @@ interface ItemCardProps {
 }
 
 const ItemCard = ({ id, img, name, price }: ItemCardProps) => {
-  const [counter, setCounter] = useState(0)
+  const [counter, setCounter] = useState(1)
   const { deleteItem, item } = useItems()
   const { getProfile } = useUsers()
   const { isLoggedIn } = useAuth()

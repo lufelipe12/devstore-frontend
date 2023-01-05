@@ -48,7 +48,11 @@ export const TitleDiv = styled.div`
 `
 
 export const ItemsSection = styled.section`
-  width: 90%;
+  width: 95%;
+  max-height: 60%;
+  padding: 5px 0px;
+  overflow-x: hidden;
+  overflow-y: auto;
   height: 60%;
   margin: 0px auto;
   display: flex;

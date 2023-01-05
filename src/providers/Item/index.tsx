@@ -11,6 +11,7 @@ interface ItemProps {
 
 interface ItemsContextData {
   item?: Item
+  items?: Item[]
   createItem: (newItem: ItemToCreate) => Promise<void>
   deleteItem: (id: number) => Promise<void>
 }
@@ -19,13 +20,15 @@ const ItemContext = createContext<ItemsContextData>({} as ItemsContextData)
 
 export const ItemProvider = ({ children }: ItemProps) => {
   const [item, setItem] = useState()
+  const [items, setItems] = useState<Item[]>()
 
   const createItem = async (newItem: ItemToCreate) => {
     apiDevstore
       .post("items", newItem, { withCredentials: true })
       .then((res) => {
         toast.success("Item adicionado no carrinho", toastOptions)
-        return setItem(res.data)
+        setItem(res.data)
+        items && setItems([...items, res.data])
       })
       .catch((err) => {
         toast.error(err.response.data.message, toastOptions)
@@ -45,7 +48,7 @@ export const ItemProvider = ({ children }: ItemProps) => {
   }
 
   return (
-    <ItemContext.Provider value={{ createItem, deleteItem, item }}>
+    <ItemContext.Provider value={{ createItem, deleteItem, item, items }}>
       {children}
     </ItemContext.Provider>
   )
