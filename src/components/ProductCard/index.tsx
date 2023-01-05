@@ -4,7 +4,7 @@ import { AiOutlineFire } from "react-icons/ai"
 import Button from "../Button"
 import {
   ProductCardContainer,
-  PromoText,
+  PromoSvg,
   StyledSection,
   StyledSpan,
   StyledTitle,
@@ -56,9 +56,9 @@ const ProductCard = ({
     <ProductCardContainer>
       <img src={image} />
       {hasDiscount && (
-        <PromoText>
+        <PromoSvg>
           <AiOutlineFire />
-        </PromoText>
+        </PromoSvg>
       )}
       <StyledSection>
         <StyledTitle>{name}</StyledTitle>

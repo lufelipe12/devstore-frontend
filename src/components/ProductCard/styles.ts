@@ -33,7 +33,7 @@ export const ProductCardContainer = styled.div`
   }
 `
 
-export const PromoText = styled.h2`
+export const PromoSvg = styled.h2`
   color: var(--green-1);
   position: absolute;
   right: 0px;
