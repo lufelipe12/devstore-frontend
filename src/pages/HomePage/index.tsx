@@ -1,14 +1,23 @@
 import { TextField } from "@mui/material"
 import { RiArrowRightFill, RiArrowLeftFill } from "react-icons/ri"
+import { FaRegSadTear } from "react-icons/fa"
 import { useForm } from "react-hook-form"
 import { useEffect, useState } from "react"
 
 import ProductCard from "../../components/ProductCard"
-import { ArrowDiv, ArrowsDiv, Container, InputDiv, StyledMain } from "./styles"
+import {
+  ArrowDiv,
+  ArrowsDiv,
+  ArrowsMobileDiv,
+  Container,
+  InputDiv,
+  NotFoundText,
+  StyledMain,
+} from "./styles"
 import { useProducts } from "../../providers/Products"
 
 const HomePage = () => {
-  const pageLimit = 8
+  const pageLimit = 12
 
   const { register, handleSubmit } = useForm()
   const [name, setName] = useState("")
@@ -114,6 +123,24 @@ const HomePage = () => {
             }
           )}
       </StyledMain>
+      <ArrowsMobileDiv>
+        <ArrowDiv pageExists={isPreviousPageExists(productsData?.page)}>
+          <RiArrowLeftFill onClick={backToPreviousPage} />
+        </ArrowDiv>
+        <ArrowDiv
+          pageExists={isNextPageExists(
+            productsData?.page,
+            productsData?.totalPages
+          )}
+        >
+          <RiArrowRightFill onClick={goToNextPage} />
+        </ArrowDiv>
+      </ArrowsMobileDiv>
+      {productsData?.products.length == 0 && (
+        <NotFoundText>
+          Nada encontrado... <FaRegSadTear />
+        </NotFoundText>
+      )}
     </Container>
   )
 }

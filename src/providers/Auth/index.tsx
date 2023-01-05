@@ -21,6 +21,7 @@ const AuthContext = createContext<AuthContextData>({} as AuthContextData)
 
 export const AuthProvider = ({ children }: AuthProps) => {
   const [cookies, setCookie, removeCookie] = useCookies()
+  const history = useHistory()
 
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(() => {
     if (cookies.AuthorizedDevStore) {
@@ -29,23 +30,6 @@ export const AuthProvider = ({ children }: AuthProps) => {
 
     return false
   })
-
-  const logout = async () => {
-    apiDevstore
-      .post("auth/logout", null, { withCredentials: true })
-      .then((res) => {
-        setIsLoggedIn(false)
-        removeCookie("AuthorizedDevStore")
-        toast.success("Logout realizado.", toastOptions)
-        history.push("/")
-      })
-      .catch((err) => {
-        toast.error(err.response.data.message, toastOptions)
-        console.log(err)
-      })
-  }
-
-  const history = useHistory()
 
   const login = async (user: UserLogin) => {
     await apiDevstore
@@ -57,6 +41,21 @@ export const AuthProvider = ({ children }: AuthProps) => {
           maxAge: 2000000,
         })
         history.push("/")
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message, toastOptions)
+        console.log(err)
+      })
+  }
+
+  const logout = async () => {
+    apiDevstore
+      .post("auth/logout", null, { withCredentials: true })
+      .then((res) => {
+        setIsLoggedIn(false)
+        removeCookie("AuthorizedDevStore")
+        toast.success("Logout realizado.", toastOptions)
+        history.push("/login")
       })
       .catch((err) => {
         toast.error(err.response.data.message, toastOptions)

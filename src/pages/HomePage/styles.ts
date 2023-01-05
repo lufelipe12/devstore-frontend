@@ -2,6 +2,7 @@ import styled from "styled-components"
 
 export const Container = styled.div`
   width: 65%;
+  min-height: 250px;
   margin: 35px auto;
   display: flex;
   flex-direction: column;
@@ -29,6 +30,19 @@ export const ArrowsDiv = styled.div`
     align-items: center;
   }
 `
+
+export const ArrowsMobileDiv = styled.div`
+  width: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 15px 0px;
+
+  @media (min-width: 768px) {
+    display: none;
+  }
+`
+
 interface ArrowDivProps {
   pageExists: boolean
 }
@@ -68,4 +82,10 @@ export const StyledMain = styled.main`
   gap: 20px;
   justify-content: space-evenly;
   align-items: center;
+`
+
+export const NotFoundText = styled.h1`
+  font-size: 30px;
+  font-weight: 600;
+  color: var(--green-dark);
 `

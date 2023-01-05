@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 export const StyledFooter = styled.footer`
-  height: 25px;
+  height: 20px;
   width: 100%;
   position: absolute;
   bottom: 0;
