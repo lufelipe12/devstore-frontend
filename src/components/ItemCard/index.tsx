@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { AiFillCloseCircle } from "react-icons/ai"
 
 import {
@@ -9,6 +9,8 @@ import {
   StyledPrice,
 } from "./styles"
 import textAdapter from "../../utils/textAdapter"
+import { useUsers } from "../../providers/Users"
+import { useItems } from "../../providers/Item"
 
 interface ItemCardProps {
   id: number
@@ -19,6 +21,14 @@ interface ItemCardProps {
 
 const ItemCard = ({ id, img, name, price }: ItemCardProps) => {
   const [counter, setCounter] = useState(0)
+  const { deleteItem, item } = useItems()
+  const { getProfile } = useUsers()
+
+  useEffect(() => {
+    if (item) {
+      getProfile()
+    }
+  }, [item])
 
   const addCounter = () => {
     return setCounter(counter + 1)
@@ -43,7 +53,7 @@ const ItemCard = ({ id, img, name, price }: ItemCardProps) => {
         </ProductCounterDiv>
       </section>
       <StyledPrice>{`R$ ${price}`}</StyledPrice>
-      <AiFillCloseCircle />
+      <AiFillCloseCircle onClick={() => deleteItem(id)} />
     </CartDiv>
   )
 }

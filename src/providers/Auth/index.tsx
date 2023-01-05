@@ -11,7 +11,7 @@ interface AuthProps {
 }
 
 interface AuthContextData {
-  isLoggedIn: boolean
+  isLoggedIn?: boolean
   userLoggedIn?: User
   login: (user: UserLogin) => Promise<void>
   logout: () => void
@@ -21,11 +21,10 @@ const AuthContext = createContext<AuthContextData>({} as AuthContextData)
 
 export const AuthProvider = ({ children }: AuthProps) => {
   const [cookies, setCookies, removeCookie] = useCookies([])
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>()
   const [userLoggedIn, setUserLoggedIn] = useState<User>()
 
   const logout = () => {
-    removeCookie("@DEVSTORE:cookie" as never)
     setIsLoggedIn(false)
     return history.push("/login")
   }
@@ -34,18 +33,15 @@ export const AuthProvider = ({ children }: AuthProps) => {
 
   const login = async (user: UserLogin) => {
     await apiDevstore
-      .post("auth/login", user)
+      .post("auth/login", user, { withCredentials: true })
       .then((response) => {
-        setCookies("@DEVSTORE:cookie" as never, "cookietest", {
-          maxAge: 2000000,
-        })
         setIsLoggedIn(true)
         toast.success("Login efetuado")
         history.push("/")
         return setUserLoggedIn(response.data)
       })
       .catch((err) => {
-        return toast.error(err.response.data.message || "Erro ao efetuar login")
+        return toast.error("Erro ao efetuar login")
       })
   }
 

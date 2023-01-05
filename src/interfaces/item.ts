@@ -6,3 +6,11 @@ export interface Item {
   provider: string
   hasDiscount: boolean
 }
+
+export interface ItemToCreate {
+  name: string
+  img: string
+  price: number
+  provider: string
+  hasDiscount: boolean
+}

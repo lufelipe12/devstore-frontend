@@ -12,6 +12,7 @@ interface UserProps {
 interface UsersContextData {
   user?: User
   createUser: (newUser: UserToCreate) => Promise<void>
+  getProfile: () => Promise<void>
 }
 
 const UserContext = createContext<UsersContextData>({} as UsersContextData)
@@ -38,8 +39,21 @@ export const UserProvider = ({ children }: UserProps) => {
       })
   }
 
+  const getProfile = async () => {
+    apiDevstore
+      .get("users/profile", { withCredentials: true })
+      .then((res) => {
+        setUser(res.data)
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message, {
+          position: "bottom-right",
+        })
+      })
+  }
+
   return (
-    <UserContext.Provider value={{ user, createUser }}>
+    <UserContext.Provider value={{ user, createUser, getProfile }}>
       {children}
     </UserContext.Provider>
   )

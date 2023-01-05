@@ -96,7 +96,10 @@ const HomePage = () => {
       <StyledMain>
         {productsData &&
           productsData.products.map(
-            ({ name, image, description, price }, index) => {
+            (
+              { name, image, description, price, hasDiscount, provider },
+              index
+            ) => {
               return (
                 <ProductCard
                   key={index}
@@ -104,6 +107,8 @@ const HomePage = () => {
                   image={image}
                   description={description}
                   price={price}
+                  hasDiscount={hasDiscount}
+                  provider={provider}
                 />
               )
             }

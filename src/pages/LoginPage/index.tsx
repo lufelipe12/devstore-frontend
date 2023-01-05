@@ -8,9 +8,11 @@ import Button from "../../components/Button"
 import { LoginPageContainer } from "./styles"
 import { useAuth } from "../../providers/Auth"
 import { UserLogin } from "../../interfaces/user"
+import { useUsers } from "../../providers/Users"
 
 const LoginPage = () => {
   const { login } = useAuth()
+  const { getProfile } = useUsers()
 
   const formSchema = yup.object().shape({
     email: yup.string().email("E-mail inválido").required("Campo obrigatório"),
@@ -25,11 +27,16 @@ const LoginPage = () => {
     resolver: yupResolver(formSchema),
   })
 
+  const refreshToken = (data: UserLogin) => {
+    login(data)
+    getProfile()
+  }
+
   return (
     <LoginPageContainer>
       <Form
         title="Fazer login"
-        onSubmit={handleSubmit((data) => login(data as UserLogin))}
+        onSubmit={handleSubmit((data) => refreshToken(data as UserLogin))}
       >
         <MyInput
           label="email"

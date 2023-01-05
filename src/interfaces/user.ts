@@ -1,3 +1,5 @@
+import { Cart } from "./cart"
+
 export interface UserToCreate {
   name: string
   email: string
@@ -9,6 +11,7 @@ export interface User {
   name: string
   email: string
   createdAt: Date
+  cart: Cart
 }
 
 export interface UserLogin {
