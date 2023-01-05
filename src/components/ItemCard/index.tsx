@@ -43,7 +43,7 @@ const ItemCard = ({ id, img, name, price }: ItemCardProps) => {
         </ProductCounterDiv>
       </section>
       <StyledPrice>{`R$ ${price}`}</StyledPrice>
-      <AiFillCloseCircle onClick={() => console.log("oi")} />
+      <AiFillCloseCircle />
     </CartDiv>
   )
 }

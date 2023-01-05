@@ -12,6 +12,7 @@ interface AuthProps {
 
 interface AuthContextData {
   isLoggedIn: boolean
+  userLoggedIn?: User
   login: (user: UserLogin) => Promise<void>
   logout: () => void
 }
@@ -20,7 +21,8 @@ const AuthContext = createContext<AuthContextData>({} as AuthContextData)
 
 export const AuthProvider = ({ children }: AuthProps) => {
   const [cookies, setCookies, removeCookie] = useCookies([])
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
+  const [userLoggedIn, setUserLoggedIn] = useState<User>()
 
   const logout = () => {
     removeCookie("@DEVSTORE:cookie" as never)
@@ -39,7 +41,8 @@ export const AuthProvider = ({ children }: AuthProps) => {
         })
         setIsLoggedIn(true)
         toast.success("Login efetuado")
-        return history.push("/")
+        history.push("/")
+        return setUserLoggedIn(response.data)
       })
       .catch((err) => {
         return toast.error(err.response.data.message || "Erro ao efetuar login")
@@ -47,7 +50,7 @@ export const AuthProvider = ({ children }: AuthProps) => {
   }
 
   return (
-    <AuthContext.Provider value={{ login, logout, isLoggedIn }}>
+    <AuthContext.Provider value={{ login, logout, isLoggedIn, userLoggedIn }}>
       {children}
     </AuthContext.Provider>
   )

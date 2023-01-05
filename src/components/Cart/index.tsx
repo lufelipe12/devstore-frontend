@@ -1,4 +1,5 @@
 import { AiFillCloseCircle } from "react-icons/ai"
+import { useAuth } from "../../providers/Auth"
 import Button from "../Button"
 import ItemCard from "../ItemCard"
 import {
@@ -15,6 +16,10 @@ interface CartProps {
 }
 
 const Cart = ({ isCartOpen, cartStateManager }: CartProps) => {
+  const { userLoggedIn } = useAuth()
+
+  //pegar os itens do carrinho
+
   const items = [
     {
       id: 4,
